@@ -1,0 +1,167 @@
+/* Container allowing full width and visible overflow */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.content {
+  max-width: 100%;
+  width: 100%;
+  overflow: visible;
+  padding: 20px;
+}
+
+/* Headings */
+h2 {
+  color: #2e2e2e;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Table Styles */
+.employee-table {
+  min-width: 1300px; /* increased from 1100px to 1300px */
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #616161;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 20px 12px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Table Header */
+.employee-table thead tr {
+  background-color: #f5f5f5;
+}
+
+.employee-table tbody tr:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.selected-row {
+  background-color: #e6f7ff !important;
+}
+
+/* Row height */
+.employee-table tbody tr {
+  height: 70px;
+}
+
+/* Highlight specific columns */
+.employee_id {
+  color: #333;
+  font-weight: 600;
+}
+
+.namecol {
+  color: #1f618d;
+  font-weight: 600;
+}
+
+.email {
+  color: #2c3e50;
+  font-weight: 400;
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.action-buttons button {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.action-buttons .edit-btn {
+  background-color: #3498db;
+}
+
+.action-buttons .edit-btn:hover {
+  background-color: #2980b9;
+}
+
+.action-buttons .delete-btn {
+  background-color: #e74c3c;
+}
+
+.action-buttons .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transform: scale(1.2);
+  margin: 0;
+}
+
+.employee-table thead input[type="checkbox"] {
+  transform: scale(1.6);
+  margin: 0;
+}
+
+/* First column spacing for checkboxes */
+.employee-table th:first-child,
+.employee-table td:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+/* Equal column widths */
+.employee-table th,
+.employee-table td {
+  width: 120px;
+}
+
+.employee-table th.action,
+.employee-table td.action {
+  width: 160px;
+}
+
+/* Pagination styling */
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: #f5f5f5;
+  border: none;
+  padding: 8px 14px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: 0.2s all;
+}
+
+.pagination button:hover {
+  background-color: #dcdcdc;
+}
+
+.pagination .active {
+  background-color: #3498db;
+  color: white;
+}

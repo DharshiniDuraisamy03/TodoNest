@@ -1,0 +1,105 @@
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0; /* <- make it start from 0 */
+  right: 0;
+  height: 70px;
+  background-color: #02053d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Left Card */
+.navbar-card {
+  display: flex;
+  align-items: center;
+  background: #06114e;
+  border-radius: 12px;
+  padding: 10px 16px;
+  gap: 14px;
+  min-width: 300px;
+  max-width: 350px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.navbar-logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* Clinic name & dropdown */
+.clinic-dropdown {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.clinic-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background: #ffffff;
+  color: #02053d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  min-width: 250px;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Right side profile */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-pic {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}

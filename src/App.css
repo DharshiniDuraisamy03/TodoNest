@@ -44,9 +44,9 @@
 
 .header-link {
   display: flex;
-  align-items: center; /* vertically center the logo and text */
-  justify-content: center; /* horizontally center them */
-  gap: 8px; /* spacing between image and text */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   position: fixed;
   top: 0;
   left: 50%;
@@ -54,12 +54,12 @@
   padding: 8px 16px;
   text-decoration: none;
   color: inherit;
-  background: white; /* optional: background for better visibility */
+  background: white;
   z-index: 1000;
-  width: fit-content; /* shrink-wrap the content */
+  width: fit-content;
 }
 .logo.react {
-  height: 40px; /* adjust as needed */
+  height: 40px;
   width: auto;
   transition: background-color 0.3s ease;
 }
@@ -92,4 +92,24 @@
 
 .submit-button:hover {
   background-color: #5a5eff;
+}
+
+.main-layout {
+  display: flex;
+  align-items: flex-start; /* align sidebar and content at top */
+}
+
+.content-area {
+  flex: 1;
+  padding: 20px;
+  margin-left: 70px;
+  margin-top: 10px;
+  /* optional: control width, min-width etc as needed */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }

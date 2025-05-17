@@ -1,40 +1,82 @@
-.sidebar {
-  width: 200px;
-  background-color: #f4f4f4;
+/* Sidebar.css */
+
+.sidebar-card-full {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  background-color: #ffffff;
   padding: 20px;
-  height: 100vh;
+  width: 220px;
+  min-height: 100vh;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: fixed;
+  overflow-y: auto;
   left: 0;
   top: 80px;
-  overflow-y: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.sidebar-title {
-  font-size: 18px;
-  margin-bottom: 15px;
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  padding: 20px 0;
+  margin-bottom: 20px;
 }
 
-.sidebar nav ul {
-  list-style-type: none;
-  padding: 0;
+.sidebar-logo {
+  width: 36px;
+  height: 36px;
 }
 
-.sidebar nav ul li {
-  margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-  text-decoration: none;
+.sidebar-brand {
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #333;
+}
+
+.sidebar-card-full nav ul {
+  list-style-type: none; /* remove bullets */
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar-card-full nav ul li {
+  margin: 12px 0;
+}
+
+.sidebar-card-full nav ul li a {
+  color: gray;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
   font-weight: 500;
 }
 
-.sidebar nav ul li.active a {
-  color: #646cff;
-  font-weight: 600;
+.sidebar-card-full nav ul li a:hover {
+  background-color: #e0d8ff; /* light violet */
+  color: #4b3bff; /* darker violet */
 }
 
-.sidebar nav ul li a:hover {
-  color: #646cff;
-  transition: color 0.3s ease;
+.sidebar-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+/* Active link styles */
+.sidebar-card-full nav ul li.active a {
+  color: #3b44b2;
+  font-weight: 700;
+  background-color: #d6dbff;
 }

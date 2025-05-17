@@ -8,20 +8,16 @@ import PatientFormPage from "./components/PatientRegistration/PatientRegistratio
 import RawQueryBox from "./components/RawQueryBox/RawQueryBox";
 import TabSync from "./components/TabSync/TabSync";
 import Sidebar from "./components/Sidebar";
+import TopNavbar from "./components/TopNavbar/TopNavbar"; // Add this
+import AppointmentTable from "./components/AppointmentTable/AppointmentTable";
 
 function App() {
   return (
     <Router>
-      <div className="header">
-        <a href="/" target="_self" className="header-link">
-          <img src={MedicLogo} className="logo react" alt="React logo" />
-          <h1>Medic</h1>
-        </a>
-      </div>
-
-      <div style={{ display: "flex" }}>
+      <TopNavbar />
+      <div className="main-layout">
         <Sidebar />
-        <main style={{ marginLeft: "220px", padding: "20px", width: "100%" }}>
+        <div className="content-area">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -30,8 +26,9 @@ function App() {
             <Route path="/register-patient" element={<PatientFormPage />} />
             <Route path="/sql-query" element={<RawQueryBox />} />
             <Route path="/tab-sync" element={<TabSync />} />
+            <Route path="/appointment" element={<AppointmentTable />} />
           </Routes>
-        </main>
+        </div>
       </div>
     </Router>
   );
