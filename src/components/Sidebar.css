@@ -1,0 +1,40 @@
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 80px;
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.sidebar nav ul li.active a {
+  color: #646cff;
+  font-weight: 600;
+}
+
+.sidebar nav ul li a:hover {
+  color: #646cff;
+  transition: color 0.3s ease;
+}
