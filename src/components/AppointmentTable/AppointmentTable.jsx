@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import appointmentsData from "./appointmentsData";
 import "./AppointmentTable.css";
 import editIcon from "../../assets/edit-01.svg";
 import deleteIcon from "../../assets/Button.svg";
 
-export default function AppointmentTable() {
+export default function AppointmentTable({ patients }) {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 8;
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentAppointments = appointmentsData.slice(
-    indexOfFirstRow,
-    indexOfLastRow
-  );
-  const totalPages = Math.ceil(appointmentsData.length / rowsPerPage);
+  const currentAppointments = patients.slice(indexOfFirstRow, indexOfLastRow);
+  const totalPages = Math.ceil(patients.length / rowsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -52,11 +48,12 @@ export default function AppointmentTable() {
             {currentAppointments.map(
               ({
                 id,
-                patientName,
-                age,
-                phone,
-                date,
-                time,
+                firstName,
+                lastName,
+                dob,
+                number,
+                appointmentDate,
+                appointmentTime,
                 status,
                 doctor,
                 department,
@@ -64,11 +61,11 @@ export default function AppointmentTable() {
               }) => (
                 <tr key={id}>
                   <td>{id}</td>
-                  <td className="namecol">{patientName}</td>
-                  <td className="email">{age}</td>
-                  <td>{phone}</td>
-                  <td>{date}</td>
-                  <td>{time}</td>
+                  <td className="namecol">{`${firstName} ${lastName}`}</td>
+                  <td>{dob}</td>
+                  <td>{number}</td>
+                  <td>{appointmentDate}</td>
+                  <td>{appointmentTime}</td>
                   <td>{status}</td>
                   <td>{doctor}</td>
                   <td>{department}</td>

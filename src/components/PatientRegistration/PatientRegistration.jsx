@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import "./PatientRegistration.css";
 
-function PatientRegistration() {
+function PatientRegistration({ onAddPatient }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    number: "",
-    email: "",
     dob: "",
     bloodGroup: "",
+    number: "",
+    email: "",
+    appointmentDate: "",
+    appointmentTime: "",
+    doctor: "",
+    department: "",
+    notes: "",
     address: "",
     city: "",
     maritalStatus: "",
@@ -29,29 +34,40 @@ function PatientRegistration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      const patientData = {
+        ...formData,
+        status: "Pending", // Auto-set status on registration
+      };
+
       const response = await fetch("http://localhost:3001/patients", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(patientData),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
+      if (!response.ok) throw new Error("Failed to register patient");
 
       const data = await response.json();
       alert(data.message);
-      // Reset form
+
+      onAddPatient(patientData);
+
       setFormData({
         firstName: "",
         lastName: "",
-        number: "",
-        email: "",
         dob: "",
         bloodGroup: "",
+        number: "",
+        email: "",
+        appointmentDate: "",
+        appointmentTime: "",
+        doctor: "",
+        department: "",
+        notes: "",
         address: "",
         city: "",
         maritalStatus: "",
@@ -62,8 +78,8 @@ function PatientRegistration() {
         language: "",
       });
     } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to register patient. Please try again.");
+      console.error(error);
+      alert("Error registering patient");
     }
   };
 
@@ -96,7 +112,31 @@ function PatientRegistration() {
           </div>
         </div>
 
-        {/* Number - Email */}
+        <div className="form-row">
+          <div className="form-group">
+            <label>Date of Birth</label>
+            <input
+              type="date"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Blood Group</label>
+            <input
+              type="text"
+              name="bloodGroup"
+              value={formData.bloodGroup}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Phone Number - Email */}
         <div className="form-row">
           <div className="form-group">
             <label>Phone Number</label>
@@ -105,6 +145,7 @@ function PatientRegistration() {
               name="number"
               value={formData.number}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -119,57 +160,103 @@ function PatientRegistration() {
           </div>
         </div>
 
-        {/* Date of Birth - Blood Group */}
+        {/* Appointment Date - Appointment Time */}
         <div className="form-row">
           <div className="form-group">
-            <label>Date of Birth</label>
+            <label>Appointment Date</label>
             <input
               type="date"
-              name="dob"
-              value={formData.dob}
+              name="appointmentDate"
+              value={formData.appointmentDate}
               onChange={handleChange}
+              required
             />
           </div>
 
           <div className="form-group">
-            <label>Blood Group</label>
+            <label>Appointment Time</label>
             <input
-              type="text"
-              name="bloodGroup"
-              value={formData.bloodGroup}
+              type="time"
+              name="appointmentTime"
+              value={formData.appointmentTime}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
 
-        {/* Home Address - City */}
+        {/* Doctor - Department */}
         <div className="form-row">
           <div className="form-group">
-            <label>Home Address</label>
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
+            <label>Doctor</label>
+            <select
+              name="doctor"
+              value={formData.doctor}
               onChange={handleChange}
-            />
+              required
+            >
+              <option value="">Select Doctor</option>
+              <option value="Dr. Smith">Dr. Smith</option>
+              <option value="Dr. Johnson">Dr. Johnson</option>
+              <option value="Dr. Williams">Dr. Williams</option>
+            </select>
           </div>
 
           <div className="form-group">
-            <label>City</label>
-            <input
-              type="text"
-              name="city"
-              value={formData.city}
+            <label>Department</label>
+            <select
+              name="department"
+              value={formData.department}
               onChange={handleChange}
-            />
+              required
+            >
+              <option value="">Select Department</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Dermatology">Dermatology</option>
+            </select>
           </div>
         </div>
 
-        {/* Additional Details Section */}
+        {/* Notes */}
+        <div className="form-group">
+          <label>Notes</label>
+          <textarea
+            name="notes"
+            value={formData.notes}
+            onChange={handleChange}
+            rows={4}
+            required
+          />
+        </div>
+
         <div className="additional-details">
           <h3>Additional Details</h3>
 
-          {/* Marital Status - Occupation */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Home Address</label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>City</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
           <div className="form-row">
             <div className="form-group">
               <label>Marital Status</label>
@@ -196,7 +283,6 @@ function PatientRegistration() {
             </div>
           </div>
 
-          {/* Religion - Gender */}
           <div className="form-row">
             <div className="form-group">
               <label>Religion</label>
@@ -223,7 +309,6 @@ function PatientRegistration() {
             </div>
           </div>
 
-          {/* Nationality - Language */}
           <div className="form-row">
             <div className="form-group">
               <label>Nationality</label>
