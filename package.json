@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "copy404": "cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "lint": "eslint .",
-    "deploy": "vite build && npx gh-pages -d dist"
+    "deploy": "vite build && npm run copy404 && npx gh-pages -d dist"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.3.1",
