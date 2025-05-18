@@ -1,21 +1,20 @@
 import React from "react";
-import dashboardImage from "../../assets/dashboardImage.png";
-import card1 from "../../assets/card1.png";
-import card2 from "../../assets/card2.png";
-import card3 from "../../assets/card3.png";
-import card4 from "../../assets/card14.png";
+import dashboardImage from "../../assets/exersice.png";
+import card1 from "../../assets/task.png";
+import card2 from "../../assets/deadline.png";
+import card3 from "../../assets/progress.png";
+import card4 from "../../assets/categories.png";
 
 function Home() {
   return (
     <div className="dashboard-container">
       <h1>
-        Complete Healthcare
-        <span className="purple-text"> for Every Need</span>
+        Organize Your Day with
+        <span className="purple-text"> TaskMaster</span>
       </h1>
 
       <h2>
-        Expert medical care designed to keep you and your family happy, and
-        safe.
+        Plan, track, and accomplish your daily goals with ease and efficiency.
       </h2>
 
       <img
@@ -24,33 +23,33 @@ function Home() {
         className="dashboard-image"
       />
 
-      <h1>Expert Medical Care for You & Your Family</h1>
+      <h1>Your Personal Productivity Hub</h1>
 
       <h2>
-        From routine checkups to specialized treatments, we provide expert
-        healthcare solutions.
+        From managing daily tasks to tracking progress, streamline your workflow
+        in one place.
       </h2>
 
       <div className="dashboard-cards">
         <div className="card">
-          <img src={card1} alt="Patients" className="card-image" />
-          <h2>Patients</h2>
-          <p>View and manage patient details.</p>
+          <img src={card1} alt="Tasks" className="card-image" />
+          <h2>Tasks</h2>
+          <p>Create, organize, and manage your daily to-dos.</p>
         </div>
         <div className="card">
-          <img src={card2} alt="Appointments" className="card-image" />
-          <h2>Appointments</h2>
-          <p>Check upcoming appointments.</p>
+          <img src={card2} alt="Upcoming Deadlines" className="card-image" />
+          <h2>Deadlines</h2>
+          <p>Stay on top of upcoming due dates and priorities.</p>
         </div>
         <div className="card">
-          <img src={card3} alt="Reports" className="card-image" />
-          <h2>Reports</h2>
-          <p>Access medical reports and records.</p>
+          <img src={card3} alt="Progress Reports" className="card-image" />
+          <h2>Progress</h2>
+          <p>Track your task completion and productivity trends.</p>
         </div>
         <div className="card">
-          <img src={card4} alt="Reports" className="card-image" />
-          <h2>Reports</h2>
-          <p>Access medical reports and records.</p>
+          <img src={card4} alt="Categories" className="card-image" />
+          <h2>Categories</h2>
+          <p>Organize tasks by work, personal, and custom categories.</p>
         </div>
       </div>
     </div>

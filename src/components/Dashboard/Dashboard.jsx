@@ -23,43 +23,42 @@ const purple2 = "#9c8ede";
 const purple3 = "#c9c5f5";
 
 const lineData = [
-  { name: "Jan", Patients: 30, Appointments: 20 },
-  { name: "Feb", Patients: 45, Appointments: 35 },
-  { name: "Mar", Patients: 60, Appointments: 50 },
-  { name: "Apr", Patients: 75, Appointments: 65 },
-  { name: "May", Patients: 90, Appointments: 80 },
+  { name: "Mon", Completed: 5, Pending: 10 },
+  { name: "Tue", Completed: 8, Pending: 7 },
+  { name: "Wed", Completed: 12, Pending: 5 },
+  { name: "Thu", Completed: 9, Pending: 6 },
+  { name: "Fri", Completed: 15, Pending: 3 },
 ];
 
 const barData = [
-  { name: "Cardiology", Patients: 40 },
-  { name: "Neurology", Patients: 30 },
-  { name: "Orthopedics", Patients: 20 },
-  { name: "Pediatrics", Patients: 25 },
+  { name: "Work", Tasks: 20 },
+  { name: "Personal", Tasks: 12 },
+  { name: "Fitness", Tasks: 8 },
+  { name: "Shopping", Tasks: 5 },
 ];
 
 const pieData = [
-  { name: "Male", value: 400 },
-  { name: "Female", value: 300 },
-  { name: "Other", value: 100 },
+  { name: "Completed", value: 70 },
+  { name: "Pending", value: 20 },
+  { name: "Overdue", value: 10 },
 ];
 
 const areaData = [
-  { day: "Mon", newPatients: 12 },
-  { day: "Tue", newPatients: 19 },
-  { day: "Wed", newPatients: 8 },
-  { day: "Thu", newPatients: 15 },
-  { day: "Fri", newPatients: 10 },
-  { day: "Sat", newPatients: 20 },
-  { day: "Sun", newPatients: 14 },
+  { day: "Mon", newTasks: 5 },
+  { day: "Tue", newTasks: 9 },
+  { day: "Wed", newTasks: 4 },
+  { day: "Thu", newTasks: 7 },
+  { day: "Fri", newTasks: 6 },
+  { day: "Sat", newTasks: 3 },
+  { day: "Sun", newTasks: 8 },
 ];
 
-// New chart data
-const newChartData = [
-  { month: "Jan", revenue: 2000 },
-  { month: "Feb", revenue: 3000 },
-  { month: "Mar", revenue: 2500 },
-  { month: "Apr", revenue: 4000 },
-  { month: "May", revenue: 3500 },
+const productivityData = [
+  { month: "Jan", completedTasks: 120 },
+  { month: "Feb", completedTasks: 135 },
+  { month: "Mar", completedTasks: 160 },
+  { month: "Apr", completedTasks: 180 },
+  { month: "May", completedTasks: 210 },
 ];
 
 function Dashboard() {
@@ -67,7 +66,7 @@ function Dashboard() {
     <div className="dashboard-container" style={{ padding: "20px" }}>
       <div className="dashboard-cards">
         <div className="card">
-          <h3>Monthly Patients and Appointments</h3>
+          <h3>Tasks Completed vs Pending (This Week)</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
               data={lineData}
@@ -78,14 +77,14 @@ function Dashboard() {
               <YAxis stroke={purple1} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="Patients" stroke={purple1} />
-              <Line type="monotone" dataKey="Appointments" stroke={purple2} />
+              <Line type="monotone" dataKey="Completed" stroke={purple1} />
+              <Line type="monotone" dataKey="Pending" stroke={purple2} />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
         <div className="card">
-          <h3>Patients by Department</h3>
+          <h3>Tasks by Category</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart
               data={barData}
@@ -96,21 +95,20 @@ function Dashboard() {
               <YAxis stroke={purple1} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="Patients" fill={purple1} />
+              <Bar dataKey="Tasks" fill={purple1} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Full width chart container */}
         <div className="full-width-chart">
-          <h3>Monthly Revenue</h3>
+          <h3>Monthly Productivity (Completed Tasks)</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart
-              data={newChartData}
+              data={productivityData}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
               <defs>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorTasks" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor={purple2} stopOpacity={0.8} />
                   <stop offset="95%" stopColor={purple2} stopOpacity={0} />
                 </linearGradient>
@@ -121,17 +119,17 @@ function Dashboard() {
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey="revenue"
+                dataKey="completedTasks"
                 stroke={purple2}
                 fillOpacity={1}
-                fill="url(#colorRevenue)"
+                fill="url(#colorTasks)"
               />
             </AreaChart>
           </ResponsiveContainer>
         </div>
 
         <div className="card">
-          <h3>Patient Gender Distribution</h3>
+          <h3>Task Status Distribution</h3>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
@@ -160,20 +158,14 @@ function Dashboard() {
         </div>
 
         <div className="card">
-          <h3>Daily New Patients</h3>
+          <h3>Daily New Tasks Added</h3>
           <ResponsiveContainer width="100%" height={250}>
             <AreaChart
               data={areaData}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
               <defs>
-                <linearGradient
-                  id="colorNewPatients"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
+                <linearGradient id="colorNewTasks" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor={purple1} stopOpacity={0.8} />
                   <stop offset="95%" stopColor={purple1} stopOpacity={0} />
                 </linearGradient>
@@ -184,10 +176,10 @@ function Dashboard() {
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey="newPatients"
+                dataKey="newTasks"
                 stroke={purple1}
                 fillOpacity={1}
-                fill="url(#colorNewPatients)"
+                fill="url(#colorNewTasks)"
               />
             </AreaChart>
           </ResponsiveContainer>

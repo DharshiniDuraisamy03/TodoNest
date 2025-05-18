@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./AppointmentTable.css";
 import editIcon from "../../assets/edit-01.svg";
 import deleteIcon from "../../assets/Button.svg";
@@ -8,9 +10,19 @@ export default function AppointmentTable({ patients }) {
   const [patientList, setPatientList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [editPatient, setEditPatient] = useState(null);
-  const rowsPerPage = 8;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [randomTip, setRandomTip] = useState("");
 
+  const rowsPerPage = 8;
   const navigate = useNavigate();
+
+  const tips = [
+    "Stay hydrated during your appointments!",
+    "Regular health checkups keep you fit.",
+    "Smile, it's your best accessory today!",
+    "Book early to avoid last-minute rush!",
+    "Prioritize your health like you do your work!",
+  ];
 
   useEffect(() => {
     const storedPatients = localStorage.getItem("patients");
@@ -20,6 +32,7 @@ export default function AppointmentTable({ patients }) {
       setPatientList(patients);
       localStorage.setItem("patients", JSON.stringify(patients));
     }
+    setRandomTip(tips[Math.floor(Math.random() * tips.length)]);
   }, [patients]);
 
   useEffect(() => {
@@ -28,11 +41,17 @@ export default function AppointmentTable({ patients }) {
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentAppointments = patientList.slice(
-    indexOfFirstRow,
-    indexOfLastRow
-  );
   const totalPages = Math.ceil(patientList.length / rowsPerPage);
+
+  const filteredAppointments = patientList
+    .filter(
+      (appointment) =>
+        appointment.firstName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        appointment.doctor.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(indexOfFirstRow, indexOfLastRow);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -47,6 +66,7 @@ export default function AppointmentTable({ patients }) {
     if (confirmed) {
       const updatedList = patientList.filter((patient) => patient.id !== id);
       setPatientList(updatedList);
+      toast.success("Appointment deleted!");
     }
   };
 
@@ -56,20 +76,32 @@ export default function AppointmentTable({ patients }) {
     );
     setPatientList(updatedList);
     setEditPatient(null);
+    toast.success("Appointment updated!");
   };
 
   const handleAddPatient = () => {
-    navigate("/register-patient"); // Adjust this path based on your route setup
+    navigate("/register-patient");
   };
 
   return (
     <>
+      <ToastContainer position="top-right" />
+      <div className="tip-banner">{randomTip}</div>
+
       <div className="header-container">
         <h2>Appointments</h2>
         <button className="add-patient-btn" onClick={handleAddPatient}>
           + Add Patient
         </button>
       </div>
+
+      <input
+        type="text"
+        placeholder="Search by Name or Doctor"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
 
       <div className="appointment-card">
         <div className="table-wrapper">
@@ -89,7 +121,7 @@ export default function AppointmentTable({ patients }) {
               </tr>
             </thead>
             <tbody>
-              {currentAppointments.map((appointment) => (
+              {filteredAppointments.map((appointment) => (
                 <tr key={appointment.id}>
                   <td className="namecol">
                     {appointment.firstName} {appointment.lastName}
@@ -98,7 +130,13 @@ export default function AppointmentTable({ patients }) {
                   <td>{appointment.number}</td>
                   <td>{appointment.appointmentDate}</td>
                   <td>{appointment.appointmentTime}</td>
-                  <td>{appointment.status}</td>
+                  <td>
+                    <span
+                      className={`status-badge ${appointment.status.toLowerCase()}`}
+                    >
+                      {appointment.status}
+                    </span>
+                  </td>
                   <td>{appointment.doctor}</td>
                   <td>{appointment.department}</td>
                   <td>{appointment.notes}</td>
@@ -193,14 +231,16 @@ export default function AppointmentTable({ patients }) {
                 })
               }
             />
-            <input
-              type="text"
+            <select
               value={editPatient.status}
               onChange={(e) =>
                 setEditPatient({ ...editPatient, status: e.target.value })
               }
-              placeholder="Status"
-            />
+            >
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
             <input
               type="text"
               value={editPatient.doctor}

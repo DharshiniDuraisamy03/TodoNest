@@ -3,12 +3,14 @@ import { useState } from "react";
 import "./Sidebar.css";
 import "../App.css";
 import DashboardIcon from "../assets/Dashboard.svg";
-import MedicLogo from "../assets/Logomark.svg";
+import MedicLogo from "../assets/planning.png";
 import Home from "../assets/home.svg";
 import User from "../assets/users.svg";
 import Registration from "../assets/Registraion.svg";
 import SettingsIcon from "../assets/settings.svg";
 import LogoutIcon from "../assets/logout.svg";
+import Activity from "../assets/activity.png";
+import Activity1 from "../assets/user-01.png";
 
 function Sidebar() {
   const location = useLocation();
@@ -25,7 +27,7 @@ function Sidebar() {
     <div className="sidebar-card-full">
       <div className="sidebar-header">
         <img src={MedicLogo} className="sidebar-logo" alt="Medic Logo" />
-        <span className="sidebar-brand">Medic</span>
+        <span className="sidebar-brand">TodoNest</span>
       </div>
 
       <nav>
@@ -47,6 +49,20 @@ function Sidebar() {
             </Link>
           </li>
 
+          <li className={isActive("/calendar") ? "active" : ""}>
+            <Link to="/activity">
+              <img src={Activity1} alt="Activity" className="sidebar-icon" />
+              Activity
+            </Link>
+          </li>
+
+          <li className={isActive("/calendar") ? "active" : ""}>
+            <Link to="/calendar">
+              <img src={Activity} alt="Activity" className="sidebar-icon" />
+              Calendar
+            </Link>
+          </li>
+
           <li className={isActive("/register-patient") ? "active" : ""}>
             <Link to="/register-patient">
               <img
@@ -54,7 +70,7 @@ function Sidebar() {
                 alt="PatientRegistration"
                 className="sidebar-icon"
               />
-              Patient Registration
+              Create New Activity
             </Link>
           </li>
           <li className={isActive("/appointment") ? "active" : ""}>

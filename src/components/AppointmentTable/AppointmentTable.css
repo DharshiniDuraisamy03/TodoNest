@@ -195,3 +195,41 @@ input[type="checkbox"] {
   border-radius: 5px;
   font-size: 14px;
 }
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #f0ad4e;
+}
+
+.status-badge.completed {
+  background-color: #5cb85c;
+}
+
+.status-badge.cancelled {
+  background-color: #d9534f;
+}
+
+.search-input {
+  padding: 8px;
+  margin: 10px 0;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.tip-banner {
+  background-color: #e6f7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-style: italic;
+  text-align: center;
+  color: #333;
+}

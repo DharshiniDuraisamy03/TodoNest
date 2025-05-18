@@ -1,27 +1,18 @@
 import React, { useState } from "react";
-import "./PatientRegistration.css";
+import "./PatientRegistration.css"; // you can rename this CSS file too later
 
-function PatientRegistration({ onAddPatient }) {
+function ActivityCreation({ onAddActivity }) {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    dob: "",
-    bloodGroup: "",
-    number: "",
-    email: "",
-    appointmentDate: "",
-    appointmentTime: "",
-    doctor: "",
-    department: "",
+    title: "",
+    description: "",
+    dueDate: "",
+    dueTime: "",
+    priority: "",
+    category: "",
+    status: "",
+    assignedTo: "",
+    tags: "",
     notes: "",
-    address: "",
-    city: "",
-    maritalStatus: "",
-    occupation: "",
-    religion: "",
-    gender: "",
-    nationality: "",
-    language: "",
   });
 
   const handleChange = (e) => {
@@ -35,193 +26,168 @@ function PatientRegistration({ onAddPatient }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const patientData = {
+    const activityData = {
       ...formData,
-      id: Date.now(), // unique ID
-      status: "Pending",
+      id: Date.now(),
     };
 
     try {
-      // get existing patients or initialize empty array
-      const existingPatients =
-        JSON.parse(localStorage.getItem("patients")) || [];
+      const existingActivities =
+        JSON.parse(localStorage.getItem("activities")) || [];
 
-      // add new patient to the list
-      existingPatients.push(patientData);
+      existingActivities.push(activityData);
 
-      // update localStorage
-      localStorage.setItem("patients", JSON.stringify(existingPatients));
+      localStorage.setItem("activities", JSON.stringify(existingActivities));
 
-      alert("Patient registered successfully!");
+      alert("Activity added successfully!");
 
-      // pass new patient to parent component if needed
-      if (onAddPatient) {
-        onAddPatient(patientData);
+      if (onAddActivity) {
+        onAddActivity(activityData);
       }
 
-      // reset form
       setFormData({
-        firstName: "",
-        lastName: "",
-        dob: "",
-        bloodGroup: "",
-        number: "",
-        email: "",
-        appointmentDate: "",
-        appointmentTime: "",
-        doctor: "",
-        department: "",
+        title: "",
+        description: "",
+        dueDate: "",
+        dueTime: "",
+        priority: "",
+        category: "",
+        status: "",
+        assignedTo: "",
+        tags: "",
         notes: "",
-        address: "",
-        city: "",
-        maritalStatus: "",
-        occupation: "",
-        religion: "",
-        gender: "",
-        nationality: "",
-        language: "",
       });
     } catch (error) {
       console.error(error);
-      alert("Error registering patient");
+      alert("Error adding activity");
     }
   };
 
   return (
     <div className="form-container">
-      <h2>Patient Registration</h2>
+      <h2>Create New Activity</h2>
       <form onSubmit={handleSubmit}>
-        {/* First Name - Last Name */}
-        <div className="form-row">
-          <div className="form-group">
-            <label>First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Title */}
+        <div className="form-group">
+          <label>Task Title</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
         </div>
 
+        {/* Description */}
+        <div className="form-group">
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            rows={4}
+            required
+          />
+        </div>
+
+        {/* Due Date - Time */}
         <div className="form-row">
           <div className="form-group">
-            <label>Date of Birth</label>
+            <label>Due Date</label>
             <input
               type="date"
-              name="dob"
-              value={formData.dob}
+              name="dueDate"
+              value={formData.dueDate}
               onChange={handleChange}
               required
             />
           </div>
 
           <div className="form-group">
-            <label>Blood Group</label>
-            <input
-              type="text"
-              name="bloodGroup"
-              value={formData.bloodGroup}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        {/* Phone Number - Email */}
-        <div className="form-row">
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="text"
-              name="number"
-              value={formData.number}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        {/* Appointment Date - Appointment Time */}
-        <div className="form-row">
-          <div className="form-group">
-            <label>Appointment Date</label>
-            <input
-              type="date"
-              name="appointmentDate"
-              value={formData.appointmentDate}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Appointment Time</label>
+            <label>Due Time</label>
             <input
               type="time"
-              name="appointmentTime"
-              value={formData.appointmentTime}
+              name="dueTime"
+              value={formData.dueTime}
               onChange={handleChange}
               required
             />
           </div>
         </div>
 
-        {/* Doctor - Department */}
+        {/* Priority - Category */}
         <div className="form-row">
           <div className="form-group">
-            <label>Doctor</label>
+            <label>Priority</label>
             <select
-              name="doctor"
-              value={formData.doctor}
+              name="priority"
+              value={formData.priority}
               onChange={handleChange}
               required
             >
-              <option value="">Select Doctor</option>
-              <option value="Dr. Smith">Dr. Smith</option>
-              <option value="Dr. Johnson">Dr. Johnson</option>
-              <option value="Dr. Williams">Dr. Williams</option>
+              <option value="">Select Priority</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label>Department</label>
+            <label>Category</label>
             <select
-              name="department"
-              value={formData.department}
+              name="category"
+              value={formData.category}
               onChange={handleChange}
               required
             >
-              <option value="">Select Department</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Pediatrics">Pediatrics</option>
-              <option value="Dermatology">Dermatology</option>
+              <option value="">Select Category</option>
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Learning">Learning</option>
             </select>
           </div>
+        </div>
+
+        {/* Status - Assigned To */}
+        <div className="form-row">
+          <div className="form-group">
+            <label>Status</label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Status</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Assigned To</label>
+            <input
+              type="text"
+              name="assignedTo"
+              value={formData.assignedTo}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div className="form-group">
+          <label>Tags (comma separated)</label>
+          <input
+            type="text"
+            name="tags"
+            value={formData.tags}
+            onChange={handleChange}
+          />
         </div>
 
         {/* Notes */}
@@ -231,15 +197,14 @@ function PatientRegistration({ onAddPatient }) {
             name="notes"
             value={formData.notes}
             onChange={handleChange}
-            rows={4}
-            required
+            rows={3}
           />
         </div>
 
-        <button type="submit">Register Patient</button>
+        <button type="submit">Add Activity</button>
       </form>
     </div>
   );
 }
 
-export default PatientRegistration;
+export default ActivityCreation;

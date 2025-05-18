@@ -19,14 +19,14 @@
 
 import React, { useState } from "react";
 import "./TopNavbar.css";
-import MedicLogo from "../../assets/Logomark.svg";
+import MedicLogo from "../../assets/planning.png";
 import DropdownIcon from "../../assets/Logomark.svg";
 
 function TopNavbar() {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [clinicName, setClinicName] = useState("Medic Patient Care System");
+  const [clinicName, setClinicName] = useState("Todo Nest System");
 
-  const clinics = ["Medic Patient Care System"];
+  const clinics = ["Todo Nest System"];
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
