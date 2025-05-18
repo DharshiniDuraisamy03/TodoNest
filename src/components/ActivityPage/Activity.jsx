@@ -52,7 +52,6 @@ const activities = [
   },
 ];
 
-// Helper: split array into chunks of 2
 function chunkArray(arr, chunkSize) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
