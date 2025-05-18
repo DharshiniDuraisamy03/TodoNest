@@ -15,8 +15,20 @@
   background-color: #f4f4f4;
   border-radius: 12px;
   padding: 24px;
-  width: 250px;
+  width: 435px;
+  height: 380px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.full-width-chart {
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 1300px; /* max width for large screens */
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .card:hover {
@@ -31,4 +43,25 @@
 
 .card p {
   color: #666;
+}
+
+.dashboard-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px; /* fixed height */
+  object-fit: cover;
+  border-radius: 8px;
+  /* margin-bottom: 15px; */
+}
+
+.purple-text {
+  color: #6a4bcd; /* a nice purple shade */
 }

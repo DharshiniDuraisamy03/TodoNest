@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import "./Sidebar.css";
 import "../App.css";
 import DashboardIcon from "../assets/Dashboard.svg";
@@ -6,14 +7,19 @@ import MedicLogo from "../assets/Logomark.svg";
 import Home from "../assets/home.svg";
 import User from "../assets/users.svg";
 import Registration from "../assets/Registraion.svg";
-
-// src/assets/Registraion.svg
-// import DashboardIcon from "../assets/Dashboard.svg";
+import SettingsIcon from "../assets/settings.svg";
+import LogoutIcon from "../assets/logout.svg";
 
 function Sidebar() {
   const location = useLocation();
+  const [message] = useState("");
 
   const isActive = (path) => location.pathname === path;
+
+  // const handleSettingsClick = (e) => {
+  //   e.preventDefault();
+  //   setMessage("Coming soon...");
+  // };
 
   return (
     <div className="sidebar-card-full">
@@ -24,6 +30,12 @@ function Sidebar() {
 
       <nav>
         <ul>
+          <li className={isActive("/home") ? "active" : ""}>
+            <Link to="/home">
+              <img src={Home} alt="Home" className="sidebar-icon" />
+              Home
+            </Link>
+          </li>
           <li className={isActive("/dashboard") ? "active" : ""}>
             <Link to="/dashboard">
               <img
@@ -32,12 +44,6 @@ function Sidebar() {
                 className="sidebar-icon"
               />
               Dashboard
-            </Link>
-          </li>
-          <li className={isActive("/home") ? "active" : ""}>
-            <Link to="/home">
-              <img src={Home} alt="Home" className="sidebar-icon" />
-              Home
             </Link>
           </li>
 
@@ -51,7 +57,7 @@ function Sidebar() {
               Patient Registration
             </Link>
           </li>
-          <li className={isActive("/tab-sync") ? "active" : ""}>
+          <li className={isActive("/appointment") ? "active" : ""}>
             <Link to="/appointment">
               <img
                 src={Registration}
@@ -61,20 +67,36 @@ function Sidebar() {
               Appointment
             </Link>
           </li>
-          {/* <li className={isActive("/sql-query") ? "active" : ""}>
-            <Link to="/sql-query">
-              <img src={Billing} alt="RawSQLQuery" className="sidebar-icon" />
-              Raw SQL Query
+
+          <li className={isActive("/settings") ? "active" : ""}>
+            <Link to="/settings">
+              <img src={SettingsIcon} alt="Settings" className="sidebar-icon" />
+              Settings
             </Link>
           </li>
-          <li className={isActive("/tab-sync") ? "active" : ""}>
-            <Link to="/tab-sync">
-              <img src={DashboardIcon} alt="TabSync" className="sidebar-icon" />
-              Tab Sync
+
+          <li className={isActive("/login") ? "active" : ""}>
+            <Link to="/login">
+              <img src={LogoutIcon} alt="login" className="sidebar-icon" />
+              Logout
             </Link>
-          </li> */}
+          </li>
         </ul>
       </nav>
+
+      {message && (
+        <div
+          style={{
+            marginTop: "auto",
+            padding: "10px",
+            color: "#6a4baf",
+            fontWeight: "600",
+            fontSize: "1rem",
+          }}
+        >
+          {message}
+        </div>
+      )}
     </div>
   );
 }

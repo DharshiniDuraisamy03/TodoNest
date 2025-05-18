@@ -24,14 +24,9 @@ import DropdownIcon from "../../assets/Logomark.svg";
 
 function TopNavbar() {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [clinicName, setClinicName] = useState("Northern Central Clinic");
+  const [clinicName, setClinicName] = useState("Medic Patient Care System");
 
-  const clinics = [
-    "Northern Central Clinic",
-    "Southern Medical Center",
-    "Eastern Health Hub",
-    "Western Care Clinic",
-  ];
+  const clinics = ["Medic Patient Care System"];
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -48,11 +43,6 @@ function TopNavbar() {
         <img src={MedicLogo} alt="Medic Logo" className="navbar-logo" />
         <div className="clinic-dropdown" onClick={toggleDropdown}>
           <span className="clinic-name">{clinicName}</span>
-          <img
-            src={DropdownIcon}
-            alt="Dropdown Icon"
-            className="dropdown-icon"
-          />
           {showDropdown && (
             <div className="dropdown-menu">
               {clinics.map((clinic, index) => (
@@ -70,6 +60,20 @@ function TopNavbar() {
       </div>
 
       <div className="navbar-right">
+        {/* Notification Icon */}
+        <button className="notification-btn" title="Notifications">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            width="24"
+            fill="white"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22c1.1 0 2-.89 2-1.99h-4c0 1.1.9 1.99 2 1.99zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-1.99 2h15.98L18 16z" />
+          </svg>
+          <span className="notification-badge">3</span>
+        </button>
+
         <img
           src="https://randomuser.me/api/portraits/men/75.jpg"
           alt="Profile"

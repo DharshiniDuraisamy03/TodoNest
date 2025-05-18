@@ -11,6 +11,7 @@ import Sidebar from "./components/Sidebar";
 import TopNavbar from "./components/TopNavbar/TopNavbar";
 import AppointmentTable from "./components/AppointmentTable/AppointmentTable";
 import React, { useState, useEffect } from "react";
+import Settings from "./components/Settings/Settings";
 
 function App() {
   const [patients, setPatients] = useState(() => {
@@ -62,8 +63,9 @@ function App() {
               path="/register-patient"
               element={<PatientRegistration onAddPatient={addPatient} />}
             />
-            <Route path="/sql-query" element={<RawQueryBox />} />
             <Route path="/tab-sync" element={<TabSync />} />
+            <Route path="/sql-query" element={<RawQueryBox />} />
+            <Route path="/settings" element={<Settings />} />
             <Route
               path="/appointment"
               element={<AppointmentTable patients={patients} />}

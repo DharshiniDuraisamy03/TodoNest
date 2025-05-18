@@ -19,7 +19,7 @@
 }
 
 .add-patient-btn {
-  background-color: #007bff;
+  background-color: #646cff;
   color: #fff;
   border: none;
   padding: 9px 16px;
@@ -30,7 +30,7 @@
 }
 
 .add-patient-btn:hover {
-  background-color: #0056b3;
+  background-color: #061357;
 }
 
 .table-wrapper {

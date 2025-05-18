@@ -46,14 +46,71 @@ p {
 }
 
 .secondary-button {
-  background-color: #eee;
-  color: #333;
+  background-color: #646cff;
+  color: #fff;
 }
 
 .primary-button:hover {
-  background-color: #535bf2;
+  background-color: #061357;
 }
 
 .secondary-button:hover {
-  background-color: #ddd;
+  background-color: #061357;
+}
+
+.dashboard-container {
+  padding: 24px;
+  text-align: center;
+}
+
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  padding: 24px;
+  width: 435px;
+  height: 380px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.card p {
+  color: #666;
+}
+
+.dashboard-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px; /* fixed height */
+  object-fit: cover;
+  border-radius: 8px;
+  /* margin-bottom: 15px; */
+}
+
+.purple-text {
+  color: #6a4bcd; /* a nice purple shade */
 }
