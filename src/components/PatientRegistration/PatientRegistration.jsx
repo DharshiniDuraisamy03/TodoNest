@@ -32,30 +32,34 @@ function PatientRegistration({ onAddPatient }) {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
+    const patientData = {
+      ...formData,
+      id: Date.now(), // unique ID
+      status: "Pending",
+    };
+
     try {
-      const patientData = {
-        ...formData,
-        status: "Pending", // Auto-set status on registration
-      };
+      // get existing patients or initialize empty array
+      const existingPatients =
+        JSON.parse(localStorage.getItem("patients")) || [];
 
-      const response = await fetch("http://localhost:3001/patients", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(patientData),
-      });
+      // add new patient to the list
+      existingPatients.push(patientData);
 
-      if (!response.ok) throw new Error("Failed to register patient");
+      // update localStorage
+      localStorage.setItem("patients", JSON.stringify(existingPatients));
 
-      const data = await response.json();
-      alert(data.message);
+      alert("Patient registered successfully!");
 
-      onAddPatient(patientData);
+      // pass new patient to parent component if needed
+      if (onAddPatient) {
+        onAddPatient(patientData);
+      }
 
+      // reset form
       setFormData({
         firstName: "",
         lastName: "",
@@ -230,106 +234,6 @@ function PatientRegistration({ onAddPatient }) {
             rows={4}
             required
           />
-        </div>
-
-        <div className="additional-details">
-          <h3>Additional Details</h3>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Home Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>City</label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Marital Status</label>
-              <select
-                name="maritalStatus"
-                value={formData.maritalStatus}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Occupation</label>
-              <input
-                type="text"
-                name="occupation"
-                value={formData.occupation}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Religion</label>
-              <input
-                type="text"
-                name="religion"
-                value={formData.religion}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Nationality</label>
-              <input
-                type="text"
-                name="nationality"
-                value={formData.nationality}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Language</label>
-              <input
-                type="text"
-                name="language"
-                value={formData.language}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
         </div>
 
         <button type="submit">Register Patient</button>

@@ -22,10 +22,26 @@ function PatientApp() {
     setPatients((prev) => [...prev, newPatient]);
   };
 
+  const updatePatient = (updatedPatient) => {
+    setPatients((prev) =>
+      prev.map((patient) =>
+        patient.id === updatedPatient.id ? updatedPatient : patient
+      )
+    );
+  };
+
+  const deletePatient = (id) => {
+    setPatients((prev) => prev.filter((patient) => patient.id !== id));
+  };
+
   return (
     <>
       <PatientRegistration onAddPatient={addPatient} />
-      <AppointmentTable patients={patients} />
+      <AppointmentTable
+        patients={patients}
+        onUpdatePatient={updatePatient}
+        onDeletePatient={deletePatient}
+      />
     </>
   );
 }

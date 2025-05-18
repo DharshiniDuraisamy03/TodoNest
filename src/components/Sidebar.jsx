@@ -58,7 +58,7 @@ function Sidebar() {
               Patient Registration
             </Link>
           </li>
-          <li className={isActive("/sql-query") ? "active" : ""}>
+          {/* <li className={isActive("/sql-query") ? "active" : ""}>
             <Link to="/sql-query">
               <img src={Billing} alt="RawSQLQuery" className="sidebar-icon" />
               Raw SQL Query
@@ -69,7 +69,7 @@ function Sidebar() {
               <img src={DashboardIcon} alt="TabSync" className="sidebar-icon" />
               Tab Sync
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>

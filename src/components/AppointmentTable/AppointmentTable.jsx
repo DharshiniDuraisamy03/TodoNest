@@ -1,27 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AppointmentTable.css";
 import editIcon from "../../assets/edit-01.svg";
 import deleteIcon from "../../assets/Button.svg";
 
 export default function AppointmentTable({ patients }) {
+  const [patientList, setPatientList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [editPatient, setEditPatient] = useState(null);
   const rowsPerPage = 8;
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const storedPatients = localStorage.getItem("patients");
+    if (storedPatients) {
+      setPatientList(JSON.parse(storedPatients));
+    } else {
+      setPatientList(patients);
+      localStorage.setItem("patients", JSON.stringify(patients));
+    }
+  }, [patients]);
+
+  // Save to localStorage whenever patientList changes
+  useEffect(() => {
+    localStorage.setItem("patients", JSON.stringify(patientList));
+  }, [patientList]);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentAppointments = patients.slice(indexOfFirstRow, indexOfLastRow);
-  const totalPages = Math.ceil(patients.length / rowsPerPage);
+  const currentAppointments = patientList.slice(
+    indexOfFirstRow,
+    indexOfLastRow
+  );
+  const totalPages = Math.ceil(patientList.length / rowsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleEdit = (id) => {
-    alert(`Edit ${id}`);
+  const handleEdit = (patient) => {
+    setEditPatient(patient);
   };
 
   const handleDelete = (id) => {
-    alert(`Delete ${id}`);
+    const confirmed = window.confirm("Are you sure you want to delete?");
+    if (confirmed) {
+      const updatedList = patientList.filter((patient) => patient.id !== id);
+      setPatientList(updatedList);
+    }
+  };
+
+  const handleSave = (updatedPatient) => {
+    const updatedList = patientList.map((patient) =>
+      patient.id === updatedPatient.id ? updatedPatient : patient
+    );
+    setPatientList(updatedList);
+    setEditPatient(null);
   };
 
   return (
@@ -45,48 +78,36 @@ export default function AppointmentTable({ patients }) {
             </tr>
           </thead>
           <tbody>
-            {currentAppointments.map(
-              ({
-                id,
-                firstName,
-                lastName,
-                dob,
-                number,
-                appointmentDate,
-                appointmentTime,
-                status,
-                doctor,
-                department,
-                notes,
-              }) => (
-                <tr key={id}>
-                  <td>{id}</td>
-                  <td className="namecol">{`${firstName} ${lastName}`}</td>
-                  <td>{dob}</td>
-                  <td>{number}</td>
-                  <td>{appointmentDate}</td>
-                  <td>{appointmentTime}</td>
-                  <td>{status}</td>
-                  <td>{doctor}</td>
-                  <td>{department}</td>
-                  <td>{notes}</td>
-                  <td className="action">
-                    <div className="action-buttons">
-                      <img
-                        src={editIcon}
-                        alt="Edit"
-                        onClick={() => handleEdit(id)}
-                      />
-                      <img
-                        src={deleteIcon}
-                        alt="Delete"
-                        onClick={() => handleDelete(id)}
-                      />
-                    </div>
-                  </td>
-                </tr>
-              )
-            )}
+            {currentAppointments.map((appointment) => (
+              <tr key={appointment.id}>
+                <td>{appointment.id}</td>
+                <td className="namecol">
+                  {appointment.firstName} {appointment.lastName}
+                </td>
+                <td>{appointment.dob}</td>
+                <td>{appointment.number}</td>
+                <td>{appointment.appointmentDate}</td>
+                <td>{appointment.appointmentTime}</td>
+                <td>{appointment.status}</td>
+                <td>{appointment.doctor}</td>
+                <td>{appointment.department}</td>
+                <td>{appointment.notes}</td>
+                <td className="action">
+                  <div className="action-buttons">
+                    <img
+                      src={editIcon}
+                      alt="Edit"
+                      onClick={() => handleEdit(appointment)}
+                    />
+                    <img
+                      src={deleteIcon}
+                      alt="Delete"
+                      onClick={() => handleDelete(appointment.id)}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -104,6 +125,109 @@ export default function AppointmentTable({ patients }) {
           )
         )}
       </div>
+
+      {/* Edit Card */}
+      {editPatient && (
+        <div className="edit-card">
+          <h3>Edit Appointment</h3>
+          <div className="form-group">
+            <input
+              type="text"
+              value={editPatient.firstName}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, firstName: e.target.value })
+              }
+              placeholder="First Name"
+            />
+            <input
+              type="text"
+              value={editPatient.lastName}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, lastName: e.target.value })
+              }
+              placeholder="Last Name"
+            />
+            <input
+              type="text"
+              value={editPatient.dob}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, dob: e.target.value })
+              }
+              placeholder="Date of Birth"
+            />
+            <input
+              type="text"
+              value={editPatient.number}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, number: e.target.value })
+              }
+              placeholder="Phone Number"
+            />
+            <input
+              type="date"
+              value={editPatient.appointmentDate}
+              onChange={(e) =>
+                setEditPatient({
+                  ...editPatient,
+                  appointmentDate: e.target.value,
+                })
+              }
+            />
+            <input
+              type="time"
+              value={editPatient.appointmentTime}
+              onChange={(e) =>
+                setEditPatient({
+                  ...editPatient,
+                  appointmentTime: e.target.value,
+                })
+              }
+            />
+            <input
+              type="text"
+              value={editPatient.status}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, status: e.target.value })
+              }
+              placeholder="Status"
+            />
+            <input
+              type="text"
+              value={editPatient.doctor}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, doctor: e.target.value })
+              }
+              placeholder="Doctor"
+            />
+            <input
+              type="text"
+              value={editPatient.department}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, department: e.target.value })
+              }
+              placeholder="Department"
+            />
+            <textarea
+              value={editPatient.notes}
+              onChange={(e) =>
+                setEditPatient({ ...editPatient, notes: e.target.value })
+              }
+              placeholder="Notes"
+            />
+          </div>
+          <div className="form-actions">
+            <button
+              className="save-btn"
+              onClick={() => handleSave(editPatient)}
+            >
+              Save
+            </button>
+            <button className="cancel-btn" onClick={() => setEditPatient(null)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
