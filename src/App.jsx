@@ -4,7 +4,7 @@ import MedicLogo from "./assets/Logomark.svg";
 import Login from "./components/LoginPage/LoginPage";
 import Home from "./components/HomePage/HomePage";
 import Dashboard from "./components/Dashboard/Dashboard";
-import PatientRegistration from "./components/PatientRegistration/PatientRegistration"; // Fixed import name
+import PatientRegistration from "./components/PatientRegistration/PatientRegistration";
 import RawQueryBox from "./components/RawQueryBox/RawQueryBox";
 import TabSync from "./components/TabSync/TabSync";
 import Sidebar from "./components/Sidebar";
@@ -48,7 +48,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename="/Medic">
       <TopNavbar />
       <div className="main-layout">
         <Sidebar />
