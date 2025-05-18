@@ -5,7 +5,9 @@ import DashboardIcon from "../assets/Dashboard.svg";
 import MedicLogo from "../assets/Logomark.svg";
 import Home from "../assets/home.svg";
 import User from "../assets/users.svg";
-import Billing from "../assets/Billing.svg";
+import Registration from "../assets/Registraion.svg";
+
+// src/assets/Registraion.svg
 // import DashboardIcon from "../assets/Dashboard.svg";
 
 function Sidebar() {
@@ -38,16 +40,7 @@ function Sidebar() {
               Home
             </Link>
           </li>
-          <li className={isActive("/tab-sync") ? "active" : ""}>
-            <Link to="/appointment">
-              <img
-                src={DashboardIcon}
-                alt="AppointmentTable"
-                className="sidebar-icon"
-              />
-              Appointment
-            </Link>
-          </li>
+
           <li className={isActive("/register-patient") ? "active" : ""}>
             <Link to="/register-patient">
               <img
@@ -56,6 +49,16 @@ function Sidebar() {
                 className="sidebar-icon"
               />
               Patient Registration
+            </Link>
+          </li>
+          <li className={isActive("/tab-sync") ? "active" : ""}>
+            <Link to="/appointment">
+              <img
+                src={Registration}
+                alt="AppointmentTable"
+                className="sidebar-icon"
+              />
+              Appointment
             </Link>
           </li>
           {/* <li className={isActive("/sql-query") ? "active" : ""}>

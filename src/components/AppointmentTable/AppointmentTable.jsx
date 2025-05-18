@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AppointmentTable.css";
 import editIcon from "../../assets/edit-01.svg";
 import deleteIcon from "../../assets/Button.svg";
@@ -9,7 +10,8 @@ export default function AppointmentTable({ patients }) {
   const [editPatient, setEditPatient] = useState(null);
   const rowsPerPage = 8;
 
-  // Load from localStorage on mount
+  const navigate = useNavigate();
+
   useEffect(() => {
     const storedPatients = localStorage.getItem("patients");
     if (storedPatients) {
@@ -20,7 +22,6 @@ export default function AppointmentTable({ patients }) {
     }
   }, [patients]);
 
-  // Save to localStorage whenever patientList changes
   useEffect(() => {
     localStorage.setItem("patients", JSON.stringify(patientList));
   }, [patientList]);
@@ -57,76 +58,85 @@ export default function AppointmentTable({ patients }) {
     setEditPatient(null);
   };
 
+  const handleAddPatient = () => {
+    navigate("/register-patient"); // Adjust this path based on your route setup
+  };
+
   return (
     <>
-      <h2>Appointments</h2>
-      <div className="table-wrapper">
-        <table className="employee-table">
-          <thead>
-            <tr>
-              <th>Patient Id</th>
-              <th>Patient Name</th>
-              <th>Age</th>
-              <th>Phone</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Doctor</th>
-              <th>Department</th>
-              <th>Notes</th>
-              <th className="action">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentAppointments.map((appointment) => (
-              <tr key={appointment.id}>
-                <td>{appointment.id}</td>
-                <td className="namecol">
-                  {appointment.firstName} {appointment.lastName}
-                </td>
-                <td>{appointment.dob}</td>
-                <td>{appointment.number}</td>
-                <td>{appointment.appointmentDate}</td>
-                <td>{appointment.appointmentTime}</td>
-                <td>{appointment.status}</td>
-                <td>{appointment.doctor}</td>
-                <td>{appointment.department}</td>
-                <td>{appointment.notes}</td>
-                <td className="action">
-                  <div className="action-buttons">
-                    <img
-                      src={editIcon}
-                      alt="Edit"
-                      onClick={() => handleEdit(appointment)}
-                    />
-                    <img
-                      src={deleteIcon}
-                      alt="Delete"
-                      onClick={() => handleDelete(appointment.id)}
-                    />
-                  </div>
-                </td>
+      <div className="header-container">
+        <h2>Appointments</h2>
+        <button className="add-patient-btn" onClick={handleAddPatient}>
+          + Add Patient
+        </button>
+      </div>
+
+      <div className="appointment-card">
+        <div className="table-wrapper">
+          <table className="employee-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Doctor</th>
+                <th>Department</th>
+                <th>Notes</th>
+                <th className="action">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentAppointments.map((appointment) => (
+                <tr key={appointment.id}>
+                  <td className="namecol">
+                    {appointment.firstName} {appointment.lastName}
+                  </td>
+                  <td>{appointment.dob}</td>
+                  <td>{appointment.number}</td>
+                  <td>{appointment.appointmentDate}</td>
+                  <td>{appointment.appointmentTime}</td>
+                  <td>{appointment.status}</td>
+                  <td>{appointment.doctor}</td>
+                  <td>{appointment.department}</td>
+                  <td>{appointment.notes}</td>
+                  <td className="action">
+                    <div className="action-buttons">
+                      <img
+                        src={editIcon}
+                        alt="Edit"
+                        onClick={() => handleEdit(appointment)}
+                      />
+                      <img
+                        src={deleteIcon}
+                        alt="Delete"
+                        onClick={() => handleDelete(appointment.id)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, idx) => idx + 1).map(
+            (number) => (
+              <button
+                key={number}
+                onClick={() => handlePageChange(number)}
+                className={currentPage === number ? "active" : ""}
+              >
+                {number}
+              </button>
+            )
+          )}
+        </div>
       </div>
 
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, idx) => idx + 1).map(
-          (number) => (
-            <button
-              key={number}
-              onClick={() => handlePageChange(number)}
-              className={currentPage === number ? "active" : ""}
-            >
-              {number}
-            </button>
-          )
-        )}
-      </div>
-
-      {/* Edit Card */}
       {editPatient && (
         <div className="edit-card">
           <h3>Edit Appointment</h3>

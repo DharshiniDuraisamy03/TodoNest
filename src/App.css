@@ -102,8 +102,9 @@
 .content-area {
   flex: 1;
   padding: 20px;
-  margin-left: 70px;
+  margin-left: 200px;
   margin-top: 10px;
+  text-align: left;
   /* optional: control width, min-width etc as needed */
 }
 
