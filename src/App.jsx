@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import MedicLogo from "./assets/Logomark.svg";
 import Login from "./components/LoginPage/LoginPage";
@@ -48,7 +48,7 @@ function App() {
   }
 
   return (
-    <Router basename="/Medic">
+    <Router>
       <TopNavbar />
       <div className="main-layout">
         <Sidebar />
