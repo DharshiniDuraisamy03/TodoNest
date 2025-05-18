@@ -27,9 +27,44 @@ function PatientRegistration() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+    try {
+      const response = await fetch("http://localhost:3001/patients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      alert(data.message);
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        number: "",
+        email: "",
+        dob: "",
+        bloodGroup: "",
+        address: "",
+        city: "",
+        maritalStatus: "",
+        occupation: "",
+        religion: "",
+        gender: "",
+        nationality: "",
+        language: "",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to register patient. Please try again.");
+    }
   };
 
   return (
