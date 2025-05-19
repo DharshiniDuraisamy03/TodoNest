@@ -12,22 +12,26 @@ import LogoutIcon from "../assets/logout.svg";
 import Activity from "../assets/activity.png";
 import Activity1 from "../assets/user-01.png";
 
-function Sidebar() {
+function Sidebar({ onClose }) {
   const location = useLocation();
   const [message] = useState("");
 
   const isActive = (path) => location.pathname === path;
-
-  // const handleSettingsClick = (e) => {
-  //   e.preventDefault();
-  //   setMessage("Coming soon...");
-  // };
 
   return (
     <div className="sidebar-card-full">
       <div className="sidebar-header">
         <img src={MedicLogo} className="sidebar-logo" alt="Medic Logo" />
         <span className="sidebar-brand">TodoNest</span>
+        {/* Close Icon */}
+        <button
+          className="sidebar-close-btn"
+          onClick={onClose}
+          aria-label="Close sidebar"
+          title="Close sidebar"
+        >
+          ✕
+        </button>
       </div>
 
       <nav>
@@ -49,7 +53,7 @@ function Sidebar() {
             </Link>
           </li>
 
-          <li className={isActive("/calendar") ? "active" : ""}>
+          <li className={isActive("/activity") ? "active" : ""}>
             <Link to="/activity">
               <img src={Activity1} alt="Activity" className="sidebar-icon" />
               Activity
@@ -58,7 +62,7 @@ function Sidebar() {
 
           <li className={isActive("/calendar") ? "active" : ""}>
             <Link to="/calendar">
-              <img src={Activity} alt="Activity" className="sidebar-icon" />
+              <img src={Activity} alt="Calendar" className="sidebar-icon" />
               Calendar
             </Link>
           </li>

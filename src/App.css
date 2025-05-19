@@ -95,7 +95,7 @@
 }
 
 .main-layout {
-  display: flex;
+  /* display: flex; */
   align-items: flex-start; /* align sidebar and content at top */
 }
 

@@ -174,3 +174,87 @@
   color: #888;
   margin-left: 12px;
 }
+
+/* Add subtle hover effect on day cells */
+.day-cell:hover:not(.empty-cell) {
+  background: #e0e7ff;
+  box-shadow: 0 0 8px #4b3bff88;
+  color: #4b3bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Add hover effect for upcoming tasks list items */
+.upcoming-tasks li:hover {
+  background-color: #dbeafe; /* Light blue background */
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+/* Scrollbar styling for better UX on activity list and upcoming tasks */
+.activity-list::-webkit-scrollbar,
+.upcoming-tasks ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+.activity-list::-webkit-scrollbar-track,
+.upcoming-tasks ul::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.activity-list::-webkit-scrollbar-thumb,
+.upcoming-tasks ul::-webkit-scrollbar-thumb {
+  background-color: #a5b4fc; /* Soft purple */
+  border-radius: 8px;
+  border: 2px solid #f1f1f1;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .activity-main-grid {
+    flex-direction: column;
+  }
+  .calendar,
+  .upcoming-tasks {
+    flex: 1 1 100%;
+  }
+}
+
+/* Improve button focus and active states */
+.clear-btn:focus-visible {
+  outline: 2px solid #4b3bff;
+  outline-offset: 2px;
+}
+
+.clear-btn:active {
+  background: #3f43c8;
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Slightly refine the month-year header */
+.calendar-header {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.05em;
+  color: #3f3d56;
+}
+
+/* Activity item time color subtle improvement */
+.time {
+  color: #666666;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* Add spacing between activity message and time for smaller widths */
+@media (max-width: 500px) {
+  .activity-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .time {
+    margin-left: 0;
+    margin-top: 6px;
+  }
+}

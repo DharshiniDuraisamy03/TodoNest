@@ -91,7 +91,7 @@ export default function AppointmentTable({ patients }) {
       <div className="header-container">
         <h2>Appointments</h2>
         <button className="add-patient-btn" onClick={handleAddPatient}>
-          + Add Patient
+          + Add
         </button>
       </div>
 

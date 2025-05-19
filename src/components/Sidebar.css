@@ -80,3 +80,19 @@
   font-weight: 700;
   background-color: #d6dbff;
 }
+
+.sidebar-close-btn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem; /* reduced from 1.6rem */
+  cursor: pointer;
+  color: #6a4baf;
+  transition: color 0.3s ease;
+  padding: 2px 4px; /* added slight padding for click area */
+  line-height: 1;
+}
+
+.sidebar-close-btn:hover {
+  color: #4b3bff;
+}

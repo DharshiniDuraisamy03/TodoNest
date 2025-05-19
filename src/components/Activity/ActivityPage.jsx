@@ -125,7 +125,17 @@ export default function Activity() {
         <div className="upcoming-tasks">
           <h3>Upcoming Tasks</h3>
           {upcomingTasks.length === 0 ? (
-            <p>No upcoming appointments.</p>
+            <ul>
+              <li>
+                <strong>Team Meeting</strong> - Tomorrow at 10:00 AM
+              </li>
+              <li>
+                <strong>Project Deadline</strong> - In 3 days
+              </li>
+              <li>
+                <strong>Code Review</strong> - Next Monday at 2:00 PM
+              </li>
+            </ul>
           ) : (
             <ul>
               {upcomingTasks.map((task) => (
