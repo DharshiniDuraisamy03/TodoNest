@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://dharshiniduraisamy03.github.io/todonest",
+  "homepage": "https://dharshiniduraisamy03.github.io/Todonest",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "copy404": "cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "lint": "eslint .",
+    "predeploy": "npm run build",
     "deploy": "vite build && npm run copy404 && npx gh-pages -d dist"
   },
   "dependencies": {
