@@ -54,7 +54,7 @@ function App() {
     <Router>
       <TopNavbar />
       <div className="main-layout">
-        {/* <Sidebar /> */}
+        <Sidebar />
         <div className="content-area">
           <Routes>
             <Route path="/" element={<Home />} />
