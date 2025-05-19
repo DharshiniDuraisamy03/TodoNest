@@ -1,22 +1,3 @@
-// src/components/TopNavbar/TopNavbar.jsx
-// import React from "react";
-// import "./TopNavbar.css";
-// import ProfilePic from "../../assets/react.svg"; // add your profile pic path
-
-// function TopNavbar() {
-//   return (
-//     <div className="top-navbar">
-//       <div className="navbar-left">Northern Central Clinic</div>
-//       <div className="navbar-right">
-//         <img src={ProfilePic} alt="Profile" className="profile-pic" />
-//         <span className="profile-name">John Doe</span>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default TopNavbar;
-
 import React, { useState } from "react";
 import "./TopNavbar.css";
 import MedicLogo from "../../assets/planning.png";
