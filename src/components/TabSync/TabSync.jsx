@@ -8,7 +8,6 @@ function TabSync() {
   const [input, setInput] = useState("");
   const [tabId] = useState(`Tab-${Math.floor(Math.random() * 1000)}`);
 
-  // Listen for messages from other tabs
   useEffect(() => {
     channel.onmessage = (event) => {
       const newMessage = {
@@ -20,7 +19,6 @@ function TabSync() {
       setMessages((msgs) => [...msgs, newMessage]);
     };
 
-    // Cleanup on unmount
     return () => {
       channel.close();
     };
